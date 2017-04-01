@@ -26,7 +26,10 @@ static void        display()
     i = 0;
     while (i < MAP_SIZE)
     {
-        printf("%c ", buff_map[i] + '0');
+        if (buff_map[i] == 0)
+            printf("_  ");
+        else
+            printf("%d  ", buff_map[i]);
         if ((i + 1) % COL_SIZE == 0)
             printf("\n");
         i++;

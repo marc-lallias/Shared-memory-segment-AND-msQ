@@ -5,7 +5,7 @@
 ** Login   <pierre.peixoto@epitech.eu>
 **
 ** Started on  Sat Apr  1 14:41:34 2017 pierre.peixoto
-** Last update Sat Apr  1 20:49:02 2017 pierre.peixoto
+** Last update Sat Apr  1 21:08:26 2017 DarKmarK
 */
 
 #include "../include/msg.h"
@@ -48,11 +48,15 @@ void		print_tab()
     }
 }
 
-int		handle_display(key_t key)
+int		handle_display(key_t *arg)
 {
+    key_t key;
   int		msg_id;
   t_msg		msg;
 
+    printf("XXXX\n");
+    key = *arg;
+    printf("YYYY  %d\n", key);
   create_msg_queue(key);
   while (1)
     {
@@ -69,7 +73,7 @@ int		handle_display(key_t key)
   return (0);
 }
 
-int		main(int ac, char **av)
+/*int		main(int ac, char **av)
 {
   key_t		key;
 
@@ -79,4 +83,4 @@ int		main(int ac, char **av)
   if (handle_display(key) == -1)
     return (-1);
   return (0);
-}
+}*/

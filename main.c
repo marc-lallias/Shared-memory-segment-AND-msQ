@@ -25,25 +25,21 @@ static  void   get_proc(key_t *key)
 int         main(int ac, char **av)
 {
     key_t   key;
-    int     sem_id;
-    t_data  *data_struct;
-    t_data  *cast;
     int     shm_id;
-    void    *addr;
-    char    *str;
+    int     team;
 
-    get_proc(&key);
-    //
-    //data_struct->data = strdup("message_11");
-    //
+    if (ac != 3)
+        return (1);
+    key = ftok(av[1], 0);
+    team = atoi(av[2]);// CHECK IF ONLY NBR
     shm_id = shmget(key, 50, SHM_R | SHM_W);
     if (shm_id == -1)
     {
-        go_init(key);
+        go_init(key, team);
     }
     else
     {
-        normal_proc(key, shm_id);
+        normal_proc(key, shm_id, team);
     }
 
 }
