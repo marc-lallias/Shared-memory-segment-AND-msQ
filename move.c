@@ -15,39 +15,12 @@ static void go(t_pos *curr, int col, int row, int *map)
     int     team;
 
     team = trad_check(curr, map);
-    printf("-------------> %d\n", team);
+    //printf("-------------> %d\n", team);
     trad_change(curr, map, 0);
     curr->col = col;
     curr->row = row;
     trad_change(curr, map, team);
 }
-
-/*void        move_to(t_pos *curr, t_pos *other, int *map)
-{
-    if (ABS(curr->col - other->col) < ABS(curr->row - other->row)
-        && curr->col != other->col ||  (curr->row == other->row))
-    {
-        if (ABS(curr->col + 1 - other->col) < ABS(curr->col - 1 - other->col))
-        {
-            if (int_trad_check(curr->col + 1, curr->row, map) == 0)
-                return (go(curr, curr->col + 1, curr->row, map));
-        }
-        else if (int_trad_check(curr->col - 1, curr->row, map) == 0)
-            return (go(curr, curr->col - 1, curr->row, map));
-
-    }
-    if (ABS(curr->row + 1 - other->row) < ABS(curr->row - 1 - other->row)
-        && curr->row != other->row)
-    {
-        printf("XXXXXX\n");
-        if (int_trad_check(curr->col, curr->row + 1, map) == 0)
-            go(curr, curr->col, curr->row + 1, map);
-        else if (int_trad_check(curr->col, curr->row - 1, map) == 0)
-            go(curr, curr->col, curr->row - 1, map);
-    }
-    else if (int_trad_check(curr->col, curr->row - 1, map) == 0 && curr->row != other->row)
-        go(curr, curr->col, curr->row - 1, map);
-}*/
 
 static void     sort_by_dist(t_square tab[])
 {
@@ -107,14 +80,13 @@ void            move_to(t_pos *curr, t_pos *other, int *map)
             && tab[i].pos.col < COL_SIZE && tab[i].pos.row < ROW_SIZE &&
                 trad_check(&(tab[i].pos), map) == 0)
         {
-            printf("place col %d\trow %d\tdist %d\n", tab[i].pos.col, tab[i].pos.row,tab[i].dist);
+            //printf("place col %d\trow %d\tdist %d\n", tab[i].pos.col, tab[i].pos.row,tab[i].dist);
             go(curr, tab[i].pos.col, tab[i].pos.row, map);
             return ;
         }
         i++;
     }
 }
-
 
 static bool someone(t_pos *curr, int *map)
 {
@@ -137,28 +109,6 @@ static bool someone(t_pos *curr, int *map)
     }
     return (false);
 }
-
-/*void            found_place(int *map, t_pos *pos, const int team)
-{
-    pos->row = 0;
-    while (pos->row < ROW_SIZE)
-    {
-        pos->col = 0;
-        while (pos->col < COL_SIZE)
-        {
-            if (someone(pos, map) != true)
-            {
-                trad_change(pos, map, team);
-                return;
-            }
-            pos->col++;
-        }
-        pos->row++;
-    }
-    printf("RIEN\n");
-    pos->col = -1;
-    pos->row =  -1;
-}*/
 
 void            found_place(int *map, t_pos *pos, const int team)
 {

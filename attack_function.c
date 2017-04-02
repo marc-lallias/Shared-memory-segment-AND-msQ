@@ -4,29 +4,73 @@
 
 #include "leminpc.h"
 
-static void     put_in_buff(int buff[],int val)
+static bool     is_on_buff(int buff[], int val)
 {
-    ;
+    int         i;
+
+    i = 0;
+    //printf("val of killer -----> %d ++ %d\n", val, buff[0]);
+    while (buff[i] != -1)
+    {
+        if (buff[i] == val) {
+            return (true);
+        }
+        i++;
+    }
+    return (false);
 }
 
-int             on_contact(t_pos *curr, int team, int *map)
-{
-    int         buff[50];
-    t_pos       other;
+bool            is_die(t_pos *curr, int team, int *map) {
+    int *buff;
+    t_pos other;
+    int i;
+    //int mark;
 
+    i = 0;
     other.row = curr->row - 1;
-    while (other.row < curr->row + 1 + 1)
-    {
-        other.col = curr->col - ALLY_DIST;
-        while (other.col < curr->col + 1 + 1)
-        {
+    buff = malloc(50 * sizeof(int));
+    buff[0] = -1;
+    while (other.row < curr->row + 1 + 1) {
+        other.col = curr->col - 1;
+        while (other.col < curr->col + 1 + 1) {
             if ((other.col != curr->col || other.row != curr->row) &&
                 (other.row >= 0 && other.row < ROW_SIZE) &&
                 (other.col >= 0 && other.col < COL_SIZE))
-                if (trad_check(&other, map) != team)
-                    put_in_buff(buff, trad_check(&other, map));
-                    //return (true);
-            trad_change(&other, map, 9);
+            {
+                if ((trad_check(&other, map)) != team && (trad_check(&other, map)) != 0)
+                {
+                    //printf("oooooooooooooooooooooooooooooooooooooooooooooo\n", val);
+                    if ((is_on_buff(buff, trad_check(&other, map))) == true)
+                    {
+                        //trad_change(&other, map, 9);
+                        free(buff);
+                        return (true);
+                    }
+                    buff[i] = trad_check(&other, map);
+                    i++;
+                    buff[i] = -1;
+                }
+            }
+            other.col++;
+        }
+        other.row++;
+    }
+    free(buff);
+    return (false);
+}
+
+int on_contact(t_pos *curr, int team, int *map) {
+    t_pos other;
+
+    other.row = curr->row - 1;
+    while (other.row < curr->row + 1 + 1) {
+        other.col = curr->col - 1;
+        while (other.col < curr->col + 1 + 1) {
+            if ((other.col != curr->col || other.row != curr->row) &&
+                (other.row >= 0 && other.row < ROW_SIZE) &&
+                (other.col >= 0 && other.col < COL_SIZE))
+                if (trad_check(&other, map) != team && trad_check(&other, map) != 0)
+                    return (true);
             other.col++;
         }
         other.row++;
@@ -34,37 +78,35 @@ int             on_contact(t_pos *curr, int team, int *map)
     return (false);
 }
 
-void            go_enemy(t_pos *curr, int *map, int team)
+void go_enemy(t_pos *curr, int *map, int team, t_pos *old)
 {
-    t_pos       save;
-    t_pos       other;
-    int         ret;
-    int         closest;
+    t_pos save;
+    t_pos other;
+    int ret;
+    int closest;
 
     closest = MAP_SIZE;
     save.col = -1;
-    other.col = 0;
-    other.row = 0;
-    //if (on_contact(curr) > 0)
-    //    return ;
-    while (other.row < ROW_SIZE)
-    {
+    copy(&other, 0, 0);
+    //if (on_contact(curr, team, map) == true)
+    //    return;
+    while (other.row < ROW_SIZE) {
         other.col = 0;
-        while (other.col < COL_SIZE)
-        {
+        while (other.col < COL_SIZE) {
             if (trad_check(&other, map) != team &&
-                (other.row != curr->row || other.col != curr->col))
-                if ((ret = get_dist(&other, curr)) < closest)
-                {
+                (other.row != curr->row || other.col != curr->col)
+                && trad_check(&other, map) != 0
+                    && (old->col != other.col || old->row != other.row))
+                if ((ret = get_dist(&other, curr)) < closest) {
                     closest = ret;
-                    save.col = other.col;
-                    save.row = other.row;
+                    copy(&save, other.col, other.row);
+                    //printf("++++++++++> col %d  ++  row %d\n", save.col, save.row);
                 }
             other.col++;
         }
         other.row++;
     }
-    printf("++++++++++> col %d  ++  row %d\n", save.col, save.row);
+    //printf("------------------> col %d  ++  row %d\n", save.col, save.row);
     if (save.col != -1)
         move_to(curr, &save, map);
 }

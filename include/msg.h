@@ -45,9 +45,9 @@ typedef struct	s_msg
 ** Functions
 */
 t_msg	receive_msg(key_t key);
-int	send_new_pos(t_pos old, t_pos new, char team, key_t key);
-int	create_msg_queue(key_t key);
-int	del_msg_queue(key_t key);
+int     send_new_pos(t_pos old, t_pos new, char team, key_t key);
+int     create_msg_queue(key_t key);
+int	    del_msg_queue(key_t key);
 int    	handle_display(key_t *arg);
 
 #endif /* !MSG_H_ */

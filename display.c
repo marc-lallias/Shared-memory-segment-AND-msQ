@@ -24,6 +24,7 @@ static void        display()
     int             i;
 
     i = 0;
+    printf("----------------------------------------------------\n");
     while (i < MAP_SIZE)
     {
         if (buff_map[i] == 0)

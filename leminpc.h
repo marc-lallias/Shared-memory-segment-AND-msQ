@@ -27,7 +27,7 @@
 /*
  * COMBAT_DEFINE
  */
-#define ALLY_DIST   1
+#define ALLY_DIST   2
 
 /*
  * OTHER DEFINE
@@ -84,5 +84,14 @@ void        dec_sem(int sem_id);
  */
 int             on_contact(t_pos *pos, int team, int *map);
 int             get_dist(t_pos *other, t_pos *curr);
+void            go_enemy(t_pos *curr, int *map, int team, t_pos *old);
+bool            is_die(t_pos *curr, int team, int *map);
+
+/*
+ * QUITE
+ */
+bool            is_other_team_present(int *map, int team);
+bool            is_last_one(int *map);
+int             leave(t_pos *curr_pos, int *map, int key);
 
 #endif //LEMINPC_LEMINPC_H

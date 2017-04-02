@@ -53,7 +53,8 @@ int             go_init(int key, const int team)
     create_thread(&th, &key);
     normal_proc(key, shm_id, team);
     pthread_join(th, NULL);
-    printf("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
+    shmctl(shm_id, IPC_RMID, NULL);
+    semctl(sem_id, IPC_RMID, 0);
     //go normal proc
     /*
      * Thread et JOIN THREAD, c est lui qui quitera

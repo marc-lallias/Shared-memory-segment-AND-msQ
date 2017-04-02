@@ -5,7 +5,7 @@
 ## Login   <marc.lallias@epitech.eu>
 ## 
 ## Started on  Sat Apr  1 22:00:04 2017 DarKmarK
-## Last update Sat Apr  1 22:14:03 2017 DarKmarK
+## Last update Sun Apr  2 15:25:01 2017 DarKmarK
 ##
 
 NAME	=	lemipc
@@ -21,6 +21,7 @@ SRC	=	main.c			\
 		attack_function.c	\
 		./src/msg.c		\
 		./src/rcv.c		\
+		quite.c			\
 
 OBJ	=	$(SRC:.c=.o)
 
