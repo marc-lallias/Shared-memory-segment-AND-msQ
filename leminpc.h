@@ -5,7 +5,7 @@
 ** Login   <pierre.peixoto@epitech.eu>
 **
 ** Started on  Sun Apr  2 19:20:53 2017 pierre.peixoto
-** Last update Sun Apr  2 20:21:58 2017 pierre.peixoto
+** Last update Sun Apr  2 23:09:34 2017 DarKmarK
 */
 
 #ifndef LEMINPC_LEMINPC_H
@@ -26,8 +26,8 @@
 /*
  * MAP_DEFINE
  */
-#define COL_SIZE	15
-#define ROW_SIZE	15
+#define COL_SIZE	20
+#define ROW_SIZE	20
 #define MAP_SIZE	COL_SIZE * ROW_SIZE
 
 /*
