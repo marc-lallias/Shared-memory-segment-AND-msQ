@@ -1,11 +1,11 @@
 /*
-** msg.c for msg in /home/peixot_a/Documents/pierre.peixoto@epitech.eu/perso/tek2/c_tek2/lemipc
+** msg.c for msg in /home/peixot_a/Documents/tek2/c_tek2/lemipc
 **
 ** Made by pierre.peixoto
 ** Login   <pierre.peixoto@epitech.eu>
 **
 ** Started on  Sat Apr  1 14:41:34 2017 pierre.peixoto
-** Last update Sat Apr  1 20:48:53 2017 pierre.peixoto
+** Last update Sun Apr  2 19:11:31 2017 pierre.peixoto
 */
 #include "../include/msg.h"
 
